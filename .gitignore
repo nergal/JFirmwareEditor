@@ -1,0 +1,12 @@
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+
+.idea/
+*.iws
+*.ipr
+
+/core/build/
+/ui/build/
+/build/
