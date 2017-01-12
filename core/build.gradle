@@ -1,5 +1,15 @@
 apply plugin: 'application'
 
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.junit.platform:junit-platform-gradle-plugin:1.0.0-M3'
+    }
+}
+
+apply plugin: 'org.junit.platform.gradle.plugin'
 mainClassName = "org.nalecz.jfirmware.core.Main"
 
 sourceSets {
@@ -11,14 +21,30 @@ sourceSets {
             srcDir 'src/main/resources'
         }
     }
+
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+        resources {
+            srcDir 'src/test/resources'
+        }
+    }
+}
+
+junitPlatform {
+    reportsDir file('build/test-results/junit-platform')
 }
 
 dependencies {
     compile 'org.hid4java:hid4java:0.4.0'
     compile 'org.apache.logging.log4j:log4j-core:2.7'
+    compile 'org.apache.logging.log4j:log4j-jul:2.7'
     compile 'com.google.guava:guava:20.0'
     compile "io.reactivex.rxjava2:rxjava:2.0.4"
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    testCompile "org.junit.jupiter:junit-jupiter-api:5.0.0-M3"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:5.0.0-M3"
+    testCompile "org.mockito:mockito-core:2.+"
 }
 
 jar {

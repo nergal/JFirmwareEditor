@@ -15,9 +15,9 @@ import java.nio.ByteOrder;
 public class Device {
     private static final Logger LOG = LogManager.getLogger(Device.class);
 
-    private static final int DATAFLASH_LENGTH = 2048;
+    public static final int DATAFLASH_LENGTH = 2048;
 //    private static final int CONFIGURATION_LENGTH = 1024;
-    private static final int MONITORING_DATA_LENGTH = 64;
+    public static final int MONITORING_DATA_LENGTH = 64;
 
 //    private static final int LOGO_OFFSET = 102400;
 //    private static final int LOGO_LENGTH = 1024;
@@ -81,7 +81,7 @@ public class Device {
                 .array();
     }
 
-    private byte[] createCommand(short command, int arg1, int arg2) {
+    public byte[] createCommand(short command, int arg1, int arg2) {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
 
         try {
@@ -160,6 +160,8 @@ public class Device {
                         counter += RAW_PACKAGE_SIZE;
                         LOG.trace("< buf: {}, block: {} [{}]", String.format("%4s", counter), data.length, bytesToHex(data));
                         buffer.put(data);
+
+                        moreData = counter < size;
                     } catch (BufferUnderflowException | BufferOverflowException e) {
                         LOG.error(e.getMessage());
                     }

@@ -6,6 +6,7 @@ gradle-app.setting
 .idea/
 *.iws
 *.ipr
+*.iml
 
 /core/build/
 /ui/build/
