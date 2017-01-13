@@ -67,6 +67,7 @@ public class Main extends Application {
             Scene scene = new Scene(rootLayout);
 
             bindSceneHandlers(scene);
+            scene.getStylesheets().add(Main.class.getResource("/bootstrap3.css").toExternalForm());
 
             primaryStage.setScene(scene);
             primaryStage.show();
